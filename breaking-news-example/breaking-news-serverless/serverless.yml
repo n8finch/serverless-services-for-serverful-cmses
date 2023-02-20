@@ -1,0 +1,56 @@
+org: n8finch
+app: breaking-news-app
+service: breaking-news-service
+frameworkVersion: '3'
+
+custom:
+  tableName: 'breaking-news-table-${sls:stage}'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource:
+            - Fn::GetAtt: [ BreakingNewsTable, Arn ]
+  environment:
+    DYNAMODB_TABLE: ${self:custom.tableName}
+  httpApi:
+    cors: true
+
+functions:
+  create:
+    handler: create.create
+    events:
+      - httpApi:
+          method: POST
+          path: /breaking-news
+  get:
+    handler: get.get
+    events:
+      - httpApi:
+          method: GET
+          path: /breaking-news/{id}
+
+resources:
+  Resources:
+    BreakingNewsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+        TableName: ${self:custom.tableName}
