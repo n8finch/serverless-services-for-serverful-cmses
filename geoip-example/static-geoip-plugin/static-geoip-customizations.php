@@ -9,9 +9,8 @@ class GeoIP_Customizations {
 	public function __construct() {
 		add_action( 'wp_enqueue_scripts', array( $this, 'scripts' ) );
 
-
-		add_filter(	'static_paths', array( $this, 'add_ajax_path_to_publish_list' ) );
-		add_filter(	'static_paths_selective', array( $this, 'add_ajax_path_to_selective_publish_list' ) );
+		// add_filter(	'static_paths', array( $this, 'add_ajax_path_to_publish_list' ) );
+		// add_filter(	'static_paths_selective', array( $this, 'add_ajax_path_to_selective_publish_list' ) );
 
 		add_action( 'rest_api_init', [ $this, 'register_geoip_info_route' ] );
 		add_shortcode( 'geoip-content', [ $this, 'geoip_content_shortcode' ] );
