@@ -1,2 +1,2 @@
 [build]
-  base = "geoip-example/netlify-edge-snoopi-demo/"
+  base = "geoip-example/netlify-edge-demo/"
