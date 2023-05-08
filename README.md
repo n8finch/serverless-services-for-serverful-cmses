@@ -9,6 +9,10 @@ This repo contains the following services (coupled with installable WordPress pl
 - A GeoIP locator to show or hide content for selected countries
 - A breaking news service that doesn't require a new publish every time a custom post type is updated.
 
+## Endpoints
+- The Netlify Edge Function for the geolocation will be at: https://some-app.netlify.app/geolocation
+- The endpoints for the AWS service will be available in your terminal console when you deploy.
+
 ## Netlify Functions and Edge Functions
 - [Edge Functions Examples](https://edge-functions-examples.netlify.app/)
 - [Monorepos on Netlify](https://docs.netlify.com/configure-builds/monorepos/#recommendations-for-specific-setups)
